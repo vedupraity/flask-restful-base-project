@@ -2,70 +2,70 @@
 Define Constants here to be used App wide
 """
 
-# Default HTTP Response JSON
-DEFAULT_HTTP_RESPONSE = {
+# Default Success HTTP Response JSON
+DEFAULT_SUCCESS_HTTP_RESPONSE = {
     'success': True
 }
 
 # API Error Codes and Response JSON
 ERROR_CODES = {
-    # Generic Error Codes Definition
+    # Generic HTTP Error Codes Definition
     'BAD_REQUEST': {
-        'status': 400,
-        'response': {
+        'status_code': 400,
+        'response_body': {
             'error_code': 'BAD_REQUEST',
             'message': 'Bad Request',
         }
     },
     'UNAUTHORIZED': {
-        'status': 401,
-        'response': {
+        'status_code': 401,
+        'response_body': {
             'error_code': 'UNAUTHORIZED',
             'message': 'Unauthorized'
         }
     },
     'FORBIDDEN': {
-        'status': 403,
-        'response': {
+        'status_code': 403,
+        'response_body': {
             'error_code': 'FORBIDDEN',
             'message': 'Forbidden'
         }
     },
     'NOT_FOUND': {
-        'status': 404,
-        'response': {
+        'status_code': 404,
+        'response_body': {
             'error_code': 'NOT_FOUND',
             'message': 'Not Found'
         }
     },
     'METHOD_NOT_ALLOWED': {
-        'status': 405,
-        'response': {
+        'status_code': 405,
+        'response_body': {
             'error_code': 'METHOD_NOT_ALLOWED',
             'message': 'Method Not Allowed'
         }
     },
     'CONFLICT': {
-        'status': 409,
-        'response': {
+        'status_code': 409,
+        'response_body': {
             'error_code': 'CONFLICT',
             'message': 'Conflict'
         }
     },
     'TOO_MANY_REQUESTS': {
-        'status': 429,
-        'response': {
+        'status_code': 429,
+        'response_body': {
             'error_code': 'TOO_MANY_REQUESTS',
             'message': 'Too Many Requests'
         }
     },
     'INTERNAL_SERVER_ERROR': {
-        'status': 500,
-        'response': {
+        'status_code': 500,
+        'response_body': {
             'error_code': 'INTERNAL_SERVER_ERROR',
             'message': 'Internal Server Error'
         }
     },
 
-    # Custom Error Codes Definition
+    # Custom Error Codes Definitions goes here
 }

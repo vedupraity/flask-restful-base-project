@@ -31,4 +31,5 @@ env.bak/
 venv.bak/
 
 # Ignore configuration files created by IDEs
-.idea/*
+.idea/
+.vscode/
