@@ -4,84 +4,82 @@ Extend this class in the file `env_config.py` to create multiple environment
 configurations.
 """
 
-import logging
 import os
 
-from decouple import config
 import pytz
+from decouple import config
 
+# App Secret Key. Below Example to create a 32 character hex string
+#
+#   >>> import uuid
+#   >>> uuid.uuid4().hex
+#   'c6caf210ce2d4973a1126c5bc3aeb2aa'
 
-class AppConfig:
-    # App Secret Key. Below Example to create a 32 character hex string
-    #
-    #   >>> import uuid
-    #   >>> uuid.uuid4().hex
-    #   'c6caf210ce2d4973a1126c5bc3aeb2aa'
+SECRET_KEY = config('SECRET_KEY')
 
-    SECRET_KEY = config('SECRET_KEY')
+# What environment the app is running in. Flask and extensions may enable
+# behaviors based on the environment, such as enabling debug mode. The
+# env attribute maps to this config key. This is set by the FLASK_ENV
+# environment variable and may not behave as expected if set in code.
+#
+# **Do not enable development when deploying in production.**
+#
+# Default: `production`
 
-    # What environment the app is running in. Flask and extensions may enable
-    # behaviors based on the environment, such as enabling debug mode. The
-    # env attribute maps to this config key. This is set by the FLASK_ENV
-    # environment variable and may not behave as expected if set in code.
-    #
-    # **Do not enable development when deploying in production.**
-    #
-    # Default: `production`
+ENV = config('ENV', default='production')
 
-    ENV = config('ENV', default='production')
+# Whether debug mode is enabled. When using flask run to start the
+# development server, an interactive debugger will be shown for unhandled
+# exceptions, and the server will be reloaded when code changes. The
+# debug attribute maps to this config key. This is enabled when ENV is
+# `development` and is overridden by the FLASK_DEBUG environment
+# variable. It may not behave as expected if set in code.
+#
+# **Do not enable debug mode when deploying in production.**
+#
+# Default: True if ENV is `development`, or False otherwise.
 
-    # Database connection
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-    DATABASE = {
-        'HOST': config('db_HOST'),
-        'PORT': config('db_PORT', cast=int),
-        'NAME': config('db_NAME'),
-        'USERNAME': config('db_USERNAME'),
-        'PASSWORD': config('db_PASSWORD')
-    }
+# Database connection
 
-    # Allow hosts to access the APIs
+DATABASE = {
+    'HOST': config('db_HOST'),
+    'PORT': config('db_PORT'),
+    'NAME': config('db_NAME'),
+    'USERNAME': config('db_USERNAME'),
+    'PASSWORD': config('db_PASSWORD')
+}
 
-    ALLOWED_HOSTS = ['*']
+# Allow hosts to access the APIs
 
-    # CORS Configuration
+ALLOWED_HOSTS = ['*']
 
-    # ...
+# CORS Configuration
 
-    # Absolute path for `app` and Project Base Directory
+# ...
 
-    APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    BASE_DIR = os.path.dirname(APP_DIR)
+# Absolute path for `app` and Project Base Directory
 
-    # Logging Configurations
+APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(APP_DIR)
 
-    LOGS_DIR = os.path.join(BASE_DIR, 'logs')
-    LOGGING_LEVEL = logging.DEBUG
+# Logging Configurations
 
-    # Static url and directory configurations
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+LOGGING_LEVEL = config('LOGGING_LEVEL')
+# ...
 
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(APP_DIR, 'static')
+# Static url and directory configurations
 
-    # Whether debug mode is enabled. When using flask run to start the
-    # development server, an interactive debugger will be shown for unhandled
-    # exceptions, and the server will be reloaded when code changes. The
-    # debug attribute maps to this config key. This is enabled when ENV is
-    # `development` and is overridden by the FLASK_DEBUG environment
-    # variable. It may not behave as expected if set in code.
-    #
-    # **Do not enable debug mode when deploying in production.**
-    #
-    # Default: True if ENV is `development`, or False otherwise.
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(APP_DIR, 'static')
 
-    DEBUG = config('DEBUG', default=True, cast=bool)
+# Default Time Zone used for the Python DateTime objects will be `UTC`
+#
+# A different timezone can be set as:
+#
+#   >>> pytz.timezone('Asia/Kolkata')
+#   <DstTzInfo 'Asia/Kolkata' LMT+5:53:00 STD>
 
-    # Default Time Zone used for the Python DateTime objects will be `UTC`
-    #
-    # A different timezone can be set as:
-    #
-    #   >>> pytz.timezone('Asia/Kolkata')
-    #   <DstTzInfo 'Asia/Kolkata' LMT+5:53:00 STD>
-
-    TIME_ZONE = pytz.UTC
+TIME_ZONE = pytz.UTC
