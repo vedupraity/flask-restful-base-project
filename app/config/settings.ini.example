@@ -1,0 +1,15 @@
+[settings]
+
+# Flask App Configuration
+SECRET_KEY=c6caf210ce2d4973a1126c5bc3aeb2aa
+DEBUG=True
+
+# Do not set to `development` when deploying in production
+ENV=production
+
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=27017
+DB_NAME=test_db
+DB_USERNAME=test_db_user
+DB_PASSWORD=test_db_pass
