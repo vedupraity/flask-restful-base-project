@@ -1,23 +1,25 @@
 """
-This has a base class for the Flask configuration.
-Extend this class in the file `env_config` to create multiple required
-configurations based on the environment.
+This file contains a base class for the Flask App Configuration.
+Extend this class in the file `env_config.py` to create multiple environment
+configurations.
 """
 
 import os
 
 
 class BaseConfig:
-    # App Secret Key. Use below code to generate a random key
-    # ''.join(random.choice(string.printable) for _ in range(32))
+    # App Secret Key. Below Example to create a 32 character hex string
+    #   >>> import uuid
+    #   >>> uuid.uuid4().hex
+    #   'c6caf210ce2d4973a1126c5bc3aeb2aa'
     SECRET_KEY = None
 
     # Absolute path for `app` and Project Base Directory
     APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    PROJECT_ROOT = os.path.dirname(APP_DIR)
+    BASE_DIR = os.path.dirname(APP_DIR)
 
     # Database connection configurations
-    DEFAULT_DATABASE = {
+    DATABASE = {
         'HOST': None,
         'PORT': None,
         'NAME': None,
@@ -32,7 +34,7 @@ class BaseConfig:
     ...
 
     # Logging Configurations
-    LOGS_DIR = os.path.join(PROJECT_ROOT, 'logs')
+    LOGS_DIR = os.path.join(BASE_DIR, 'logs')
     ...
 
     # Static url and directory configurations
@@ -44,4 +46,3 @@ class BaseConfig:
 
     # Time Zone
     TIME_ZONE = 'UTC'
-
