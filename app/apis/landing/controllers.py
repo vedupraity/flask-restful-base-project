@@ -1,7 +1,8 @@
 import logging
 from datetime import datetime
 
-from flask_restful import fields, HTTPException
+from flask_restful import fields
+# from flask_restful import InternalServerError
 
 from app.generics.controllers import BaseController
 from app.generics.custom_marshal_fields import TimestampField
@@ -38,10 +39,12 @@ class LandingController(BaseController):
         LOGGER.critical('critical log statement')
 
         # flask abort example
-        try:
-            d = {}
-            value = d['nek']
-        except KeyError:
-            raise HTTPException()
+        # try:
+        #     d = {}
+        #     value = d['nek']
+        # except KeyError:
+        #     raise InternalServerError
+
+        value = [][1]
 
         return response_data

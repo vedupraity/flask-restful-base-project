@@ -207,7 +207,7 @@ class ProductionConfig(BaseConfig):
 
     # Logging Configurations
 
-    LOGGING_LEVEL = 'Error'
+    LOGGING_LEVEL = 'ERROR'
 
     LOGGING_CONFIG = {
         'version': 1,

@@ -5,7 +5,7 @@ import logging
 from flask import request
 from flask_restful import Resource, abort, marshal
 
-from app.generics.constants import HTTP_ERRORS
+from app.generics.constants import API_ERRORS
 from app.generics.controllers import BaseController
 from app.generics.models import Context
 
@@ -28,17 +28,25 @@ class BaseResource(Resource):
             return marshal(response_data, schema)
         except Exception:
             # Will log the exception automatically
-            abort(HTTP_ERRORS['INTERNAL_SERVER_ERROR']['status_code'],
-                  **HTTP_ERRORS['INTERNAL_SERVER_ERROR']['response_body'])
+            abort(API_ERRORS['InternalServerError']['status_code'],
+                  **API_ERRORS['InternalServerError'])
 
-    def get(self, *args, **kwargs):
-        return self.marshal_response({}, {}), 200
-
-    def post(self, *args, **kwargs):
-        return self.marshal_response({}, {}), 200
-
-    def put(self, *args, **kwargs):
-        return self.marshal_response({}, {}), 200
-
-    def delete(self, *args, **kwargs):
-        return self.marshal_response({}, {}), 200
+    # def get(self, *args, **kwargs):
+    #     return self.marshal_response(
+    #         self.controller.get_response(),
+    #         self.controller.marshal_fields), 200
+    #
+    # def post(self, *args, **kwargs):
+    #     return self.marshal_response(
+    #         self.controller.get_response(),
+    #         self.controller.marshal_fields), 200
+    #
+    # def put(self, *args, **kwargs):
+    #     return self.marshal_response(
+    #         self.controller.get_response(),
+    #         self.controller.marshal_fields), 200
+    #
+    # def delete(self, *args, **kwargs):
+    #     return self.marshal_response(
+    #         self.controller.get_response(),
+    #         self.controller.marshal_fields), 200

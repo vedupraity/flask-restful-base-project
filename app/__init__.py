@@ -9,7 +9,9 @@ from flask import Flask
 
 from app.apis import ApiRoutes
 from app.apis.blueprint import api_blueprint
-from app.settings.settings import BaseConfig, DevelopmentConfig, ProductionConfig
+from app.settings.settings import (
+    BaseConfig, DevelopmentConfig, ProductionConfig,
+)
 
 if BaseConfig.ENV == 'development':
     config = DevelopmentConfig()
