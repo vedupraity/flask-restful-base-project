@@ -1,22 +1,32 @@
 """
 Flask App initialization
+Ref: https://flask.palletsprojects.com/en/1.1.x/
 """
 
-from flask import Flask
-from flask_restful import Api
+from logging.config import dictConfig
 
-from app.routes_config import RoutesConfig
+from flask import Flask
+
+from app.apis import ApiRoutes
+from app.apis.blueprint import api_blueprint
+from app.settings.settings import BaseConfig, DevelopmentConfig, ProductionConfig
+
+if BaseConfig.ENV == 'development':
+    config = DevelopmentConfig()
+else:
+    config = ProductionConfig()
+
+# Configure logger before initiating flask app
+dictConfig(config.LOGGING_CONFIG)
 
 # Initiate Flask App and Api
-flask_app = Flask(__name__, static_url_path='/static')
-rest_api = Api(flask_app, catch_all_404s=True)
+APP = Flask(__name__, static_url_path=config.STATIC_URL)
 
 # Initiate app configuration
-flask_app.config.from_object('app.config.settings')
+APP.config.from_object(config)
 
-# Initiate the logger
-logger = flask_app.logger
-logger.setLevel(flask_app.config['LOGGING_LEVEL'])
+# Register all routes with the app
+ApiRoutes()
 
-# Initiate all the routes
-RoutesConfig()
+# Register blueprints here
+APP.register_blueprint(api_blueprint)

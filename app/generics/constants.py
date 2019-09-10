@@ -8,7 +8,7 @@ DEFAULT_SUCCESS_HTTP_RESPONSE = {
 }
 
 # API Error Codes and Response JSON
-ERROR_CODES = {
+HTTP_ERRORS = {
     # Generic HTTP Error Codes Definition
     'BAD_REQUEST': {
         'status_code': 400,

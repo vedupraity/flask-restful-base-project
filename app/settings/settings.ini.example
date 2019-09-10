@@ -2,10 +2,10 @@
 
 # Flask App Configuration
 SECRET_KEY=c6caf210ce2d4973a1126c5bc3aeb2aa
-DEBUG=True
+DEBUG=False
 
 # Do not set to `development` when deploying in production
-ENV=development
+ENV=production
 
 # Database Configuration
 DB_HOST=localhost
@@ -16,6 +16,4 @@ DB_PASSWORD=test_db_pass
 
 # Logging Configuration
 # Logging levels: NOTSET, DEBUG, INFO, WARNING, WARN, ERROR, FATAL, CRITICAL
-LOGGING_LEVEL=DEBUG
-ENABLE_FILE_LOGS=True
-ENABLE_CONSOLE_LOGS=True
+LOGGING_LEVEL=ERROR

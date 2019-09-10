@@ -31,7 +31,7 @@ env.bak/
 venv.bak/
 
 # Environment configurations
-app/config/settings.ini
+app/settings/settings.ini
 
 # Ignore configuration files created by IDEs
 .idea/

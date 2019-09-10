@@ -2,7 +2,7 @@
 Entry Point of the Flask Server
 """
 
-from app import flask_app
+from app import APP
 
 if __name__ == "__main__":
-    flask_app.run(host='0.0.0.0', port=8080)
+    APP.run(host='0.0.0.0', port=8080)
