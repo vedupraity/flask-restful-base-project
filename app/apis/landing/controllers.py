@@ -38,13 +38,4 @@ class LandingController(BaseController):
         LOGGER.error('error log statement')
         LOGGER.critical('critical log statement')
 
-        # flask abort example
-        # try:
-        #     d = {}
-        #     value = d['nek']
-        # except KeyError:
-        #     raise InternalServerError
-
-        value = [][1]
-
         return response_data

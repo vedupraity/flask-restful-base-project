@@ -22,7 +22,7 @@ These instructions will get you a copy of this flask project up and running on y
 
 ### Setup Virtual Environment and install dependencies
 
-```sh
+```bash
 # Create Virtual Environment
 $ virtualenv -p $(which python3.7) .venv
 # Activate Virtual Environment
@@ -31,12 +31,17 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-### Environment configuration
+### Environment configuration setup
 
-Make a copy of file `settings.ini.example` as `settings.ini` in the directory `<project_root>/app/config`.
+```bash
+# Move into the settings directory
+$ cd <project_directory>/settings
+# Create symbolic link for the environment configuration
+$ ln -s settings_uat.ini settings.ini
+```
 
 ### Run the project
 
-```sh
+```bash
 $ python server.py
 ```

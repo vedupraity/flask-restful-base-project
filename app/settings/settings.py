@@ -7,7 +7,7 @@ configurations.
 import os
 
 import pytz
-from decouple import config
+from decouple import config, Csv
 
 app_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,7 +41,7 @@ class BaseConfig(object):
     #   >>> uuid.uuid4().hex
     #   'c6caf210ce2d4973a1126c5bc3aeb2aa'
 
-    # SECRET_KEY = settings('SECRET_KEY')
+    SECRET_KEY = config('SECRET_KEY')
 
     # Whether debug mode is enabled. When using flask run to start the
     # development server, an interactive debugger will be shown for unhandled
@@ -54,67 +54,27 @@ class BaseConfig(object):
     #
     # Default: True if ENV is `development`, or False otherwise.
 
-    # DEBUG = settings('DEBUG', default=True, cast=bool)
+    DEBUG = config('DEBUG', default=True, cast=bool)
 
     # Database connection settings
 
     # DATABASE = {
-    #     'HOST': settings('db_HOST'),
-    #     'PORT': settings('db_PORT'),
-    #     'NAME': settings('db_NAME'),
-    #     'USERNAME': settings('db_USERNAME'),
-    #     'PASSWORD': settings('db_PASSWORD')
+    #     'HOST': config('db_HOST'),
+    #     'PORT': config('db_PORT'),
+    #     'NAME': config('db_NAME'),
+    #     'USERNAME': config('db_USERNAME'),
+    #     'PASSWORD': config('db_PASSWORD')
     # }
 
     # Allow hosts to access the APIs
 
     # ALLOWED_HOSTS = ['*']
-
-    # CORS Configuration
-
-    # ...
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
     # Logging Configurations
 
-    # LOGS_DIR = os.path.join(BASE_DIR, 'logs')
-
     # Logging levels: NOTSET, DEBUG, INFO, WARNING, WARN, ERROR, FATAL, CRITICAL
-    # LOGGING_LEVEL = settings('LOGGING_LEVEL')
-
-    # LOGGING_CONFIG = {
-    #     'version': 1,
-    #     'formatters': {
-    #         'default': {
-    #             'format': '[%(asctime)s] %(levelname)s in %(module)s: '
-    #                       '%(message)s',
-    #         },
-    #         'extended': {
-    #             'format': '[%(asctime)s] %(levelname)s [%(name)s: '
-    #                       '%(funcName)s: %(lineno)s] %(message)s'
-    #         }
-    #     },
-    #     'handlers': {
-    #         'wsgi': {
-    #             'class': 'logging.StreamHandler',
-    #             'stream': 'ext://flask.logging.wsgi_errors_stream',
-    #             'formatter': 'extended'
-    #         },
-    #         'rotating_file_handler': {
-    #             'level': LOGGING_LEVEL,
-    #             'class': 'logging.handlers.RotatingFileHandler',
-    #             'filename': os.path.join(BaseConfig.LOGS_DIR, 'app.log'),
-    #             'maxBytes': 1024 * 1024 * 5,  # 5 MB
-    #             'backupCount': 30,
-    #             'formatter': 'extended',
-    #         }
-    #     },
-    #     'root': {
-    #         'level': LOGGING_LEVEL,
-    #         'handlers': ['wsgi', 'rotating_file_handler']
-    #     }
-    # }
-
-    # Static url and directory configurations
+    LOGGING_LEVEL = config('LOGGING_LEVEL')
 
     STATIC_URL = '/static'
     STATIC_ROOT = os.path.join(app_dir, 'static')
@@ -130,27 +90,6 @@ class BaseConfig(object):
 
 
 class DevelopmentConfig(BaseConfig):
-    SECRET_KEY = 'c6caf210ce2d4973a1126c5bc3aeb2aa'
-
-    # Do not enable debug mode when deploying in production
-    DEBUG = True
-
-    # Allow hosts to access the APIs
-    ALLOWED_HOSTS = ['*']
-
-    # Database connection settings
-
-    # DATABASE = {
-    #     'HOST': settings('db_HOST'),
-    #     'PORT': settings('db_PORT'),
-    #     'NAME': settings('db_NAME'),
-    #     'USERNAME': settings('db_USERNAME'),
-    #     'PASSWORD': settings('db_PASSWORD')
-    # }
-
-    # Logging Configurations
-
-    LOGGING_LEVEL = 'DEBUG'
 
     LOGGING_CONFIG = {
         'version': 1,
@@ -171,7 +110,7 @@ class DevelopmentConfig(BaseConfig):
                 'formatter': 'extended'
             },
             'rotating_file_handler': {
-                'level': LOGGING_LEVEL,
+                'level': BaseConfig.LOGGING_LEVEL,
                 'class': 'logging.handlers.RotatingFileHandler',
                 'filename': os.path.join(BaseConfig.LOGS_DIR, 'app.log'),
                 'maxBytes': 1024 * 1024 * 5,  # 5 MB
@@ -180,34 +119,13 @@ class DevelopmentConfig(BaseConfig):
             }
         },
         'root': {
-            'level': LOGGING_LEVEL,
+            'level': BaseConfig.LOGGING_LEVEL,
             'handlers': ['wsgi', 'rotating_file_handler']
         }
     }
 
 
 class ProductionConfig(BaseConfig):
-    SECRET_KEY = 'c6caf210ce2d4973a1126c5bc3aeb2aa'
-
-    # Do not enable debug mode when deploying in production
-    DEBUG = False
-
-    # Allow hosts to access the APIs
-    ALLOWED_HOSTS = ['*']
-
-    # Database connection settings
-
-    # DATABASE = {
-    #     'HOST': settings('db_HOST'),
-    #     'PORT': settings('db_PORT'),
-    #     'NAME': settings('db_NAME'),
-    #     'USERNAME': settings('db_USERNAME'),
-    #     'PASSWORD': settings('db_PASSWORD')
-    # }
-
-    # Logging Configurations
-
-    LOGGING_LEVEL = 'ERROR'
 
     LOGGING_CONFIG = {
         'version': 1,
@@ -228,7 +146,7 @@ class ProductionConfig(BaseConfig):
                 'formatter': 'extended'
             },
             'rotating_file_handler': {
-                'level': LOGGING_LEVEL,
+                'level': BaseConfig.LOGGING_LEVEL,
                 'class': 'logging.handlers.RotatingFileHandler',
                 'filename': os.path.join(BaseConfig.LOGS_DIR, 'app.log'),
                 'maxBytes': 1024 * 1024 * 5,  # 5 MB
@@ -237,7 +155,7 @@ class ProductionConfig(BaseConfig):
             }
         },
         'root': {
-            'level': LOGGING_LEVEL,
+            'level': BaseConfig.LOGGING_LEVEL,
             'handlers': ['wsgi', 'rotating_file_handler']
         }
     }
