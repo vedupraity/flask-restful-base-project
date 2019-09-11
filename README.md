@@ -23,6 +23,8 @@ These instructions will get you a copy of this flask project up and running on y
 ### Setup Virtual Environment and install dependencies
 
 ```bash
+# Install virtualenv
+$ sudo apt install -y virtualenv
 # Create Virtual Environment
 $ virtualenv -p $(which python3.7) .venv
 # Activate Virtual Environment
