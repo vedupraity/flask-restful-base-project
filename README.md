@@ -11,7 +11,7 @@ These instructions will get you a copy of this flask project up and running on y
 
 ### System Requirements
 
-1. [Python]([https://www.python.org/](https://www.python.org/)) 3.6+
+1. [Python](https://www.python.org/) 3.6+
 2. [virtualenv](https://virtualenv.pypa.io/en/latest/) 15.1.0
 
 ### Dependencies
