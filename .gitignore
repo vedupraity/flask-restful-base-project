@@ -30,6 +30,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Environment configurations
+app/settings/settings.ini
+
 # Ignore configuration files created by IDEs
 .idea/
 .vscode/
