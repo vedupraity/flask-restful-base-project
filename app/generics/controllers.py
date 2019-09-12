@@ -11,7 +11,7 @@ LOGGER = logging.getLogger(__name__)
 class BaseController(object):
     # flask-restful: request parsing
     # ref: https://flask-restful.readthedocs.io/en/0.3.5/reqparse.html
-    request_parser = reqparse.RequestParser()
+    request_parser = reqparse.RequestParser(bundle_errors=True)
     validated_json = None
     context = None
 
@@ -22,10 +22,11 @@ class BaseController(object):
     def set_context(self, context):
         self.context = context
 
-    def check_context(self):
+    def get_context(self):
         if self.context is None:
             LOGGER.error('Context Not set')
             raise InternalServerError
+        return self.context
 
     def validate_request(self):
         # Add arguments to parser here
