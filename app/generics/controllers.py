@@ -3,6 +3,7 @@
 import logging
 
 from flask_restful import reqparse
+from werkzeug.exceptions import InternalServerError
 
 LOGGER = logging.getLogger(__name__)
 
@@ -23,7 +24,8 @@ class BaseController(object):
 
     def check_context(self):
         if self.context is None:
-            raise ValueError('Context not set')
+            LOGGER.error('Context Not set')
+            raise InternalServerError
 
     def validate_request(self):
         # Add arguments to parser here
